@@ -1,5 +1,7 @@
 #!/bin/env python
 
+# v20190524
+
 import sys
 import os
 import hashlib
