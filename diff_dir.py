@@ -1,6 +1,11 @@
 #!/bin/env python
 
 # v20190524
+# Running well with python36 and python27
+# Get differences between 2 directories.
+
+
+
 
 import sys
 import os
@@ -60,8 +65,8 @@ if __name__ == '__main__':
     path1 = sys.argv[1]
     path2 = sys.argv[2]
   except Exception as e:
-    print(usage()%sys.argv[0])
     print(e)
+    print(usage()%sys.argv[0])
     sys.exit(2)
 
   if path1[-1] is not '/':
