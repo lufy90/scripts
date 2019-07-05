@@ -99,9 +99,9 @@ summary()
   echo "CONF Cases:" $confedcount
   echo
   echo "System Load During Test:"
-  echo "CPU:" $sar_u
-  echo "Memory:" $sar_m
-  echo "SWAP:" $sar_s
+  echo "CPU(%):" $sar_u
+  echo "Memory(%):" $sar_m
+  echo "SWAP(%):" $sar_s
   echo -e "Queue:\tldavg-1\tldavg-5\tldavg-15\n\t$sar_q1\t$sar_q5\t$sar_q15"
   echo
 
