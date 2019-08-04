@@ -38,10 +38,10 @@ getinfo()
     processor-version
     processor-frequency"
 
-  if [ -f $INFODIR/dmidecode-bin ]; then
+  if [ -f $INFODIR/dmidecode.bin ]; then
     for i in $names
       do
-        a=$(dmidecode -s $i -u --from-dump $INFODIR/dmidecode-bin |grep -v ^#| head -n 1)
+        a=$(dmidecode -s $i -u --from-dump $INFODIR/dmidecode.bin |grep -v ^#| head -n 1)
         eval ${i//-/_}=\"$a\"
       done
     

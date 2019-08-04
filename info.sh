@@ -55,6 +55,7 @@ for blc in `lsblk | grep ^[a-z] | awk '{print $1}'`
     hdparm -i /dev/$blc > $infodir/hdparm_-i_$blc
     hdparm -Tt /dev/$blc > $infodir/hdparm_-Tt_$blc
     hdparm -I /dev/$blc > $infodir/hdparm_-I_$blc
+# get filesystem block size
   done
 
 lsscsi -L >  $infodir/lsscsi_-L
@@ -86,8 +87,9 @@ uname -a > $infodir/uname_-a
 
 lshw > $infodir/lshw
 lshw -xml > $infodir/lshw_-xml
+lshw -json -dump $infodir/lshw.db > $infodir/lshw_-json
 dmidecode > $infodir/dmidecode
-dmidecode -u --dump-bin $infodir/dmidecode-bin
+dmidecode -u --dump-bin $infodir/dmidecode.bin
 
 cp /etc/yum.repos.d -r $infodir/
 
@@ -96,7 +98,18 @@ gcc -v > $infodir/gcc_-v 2>&1
 ip ad > $infodir/ip_ad 2>&1
 cp ~/.bash_history $infodir/bash_history
 
+
 # 20190305
 
 env > $infodir/env 2>&1
 # 20190505
+
+# list all cd recorders.
+cdrecord -scanbus
+
+# 
+cp /proc/cmdline $infodir/
+cp /boot/grub/grub.cfg $infodir/
+
+# 20190802
+java -version > $infodir/java_-version
