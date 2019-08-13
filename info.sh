@@ -90,6 +90,7 @@ lshw -xml > $infodir/lshw_-xml
 lshw -json -dump $infodir/lshw.db > $infodir/lshw_-json
 dmidecode > $infodir/dmidecode
 dmidecode -u --dump-bin $infodir/dmidecode.bin
+dmidecode -q > $infodir/dmidecode_-q
 
 cp /etc/yum.repos.d -r $infodir/
 
@@ -112,4 +113,7 @@ cp /proc/cmdline $infodir/
 cp /boot/grub/grub.cfg $infodir/
 
 # 20190802
-java -version > $infodir/java_-version
+java -version > $infodir/java_-version 2>&1
+
+# 20190805
+lvs > $infodir/lvs
