@@ -13,3 +13,7 @@ New `ltpstressreporter.py`
 20190709
 New `getinfo.sh`
 - Get isoft reporter needed informations from given dir
+
+20190813
+New `gencode`
+- Generate code header
