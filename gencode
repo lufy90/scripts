@@ -1,0 +1,45 @@
+#!/bin/env python36
+# gencode
+# Author: Lufei
+# Date: 20190813
+# Generate code header
+
+import sys, os, time
+
+def gencode(filename):
+  username_ = os.environ['USER']
+  time_ = time.strftime("%Y%m%d %H:%M:%S",time.localtime())
+
+  fname = os.path.basename(filename)
+  suffix = fname.split('.')[-1]
+
+  interpreter = ''
+  commenter = '#'
+
+  if suffix == 'sh':
+    interpreter = "#!/bin/bash"
+  elif suffix == 'py':
+    interpreter = "#!/bin/env python36"
+  elif suffix == 'c' or suffix == 'h' or suffix == 'cpp':
+    commenter = '//'
+  elif suffix == 'pl':
+    interpreter = '#!/bin/env perl'
+  else:
+    pass
+
+  with open(filename, 'w') as f:
+    f.write('%s\n' % interpreter)
+    f.write('%s filename: %s\n' % (commenter, fname))
+    f.write('%s Author: %s\n' % (commenter, username_))
+    f.write('%s Date: %s\n' % (commenter, time_))
+    
+
+def main(fnames):
+  for i in fnames:
+    if os.path.isfile(i):
+      print('Already exists: %s' % i)
+      continue
+    gencode(i)
+
+if __name__ == '__main__':
+  main(sys.argv[1:])
