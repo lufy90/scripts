@@ -89,4 +89,4 @@ if __name__ == '__main__':
   for i in md5s2:
     meta2[i[0]] = i[1]
   print('Compared with %s, %s has followed chages:' % (path1[:-1], path2[:-1]))
-  diff(meta1, meta2)
+  diff(meta2, meta1)
