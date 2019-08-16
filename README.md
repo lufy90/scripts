@@ -17,3 +17,7 @@ New `getinfo.sh`
 20190813
 New `gencode`
 - Generate code header
+
+20190815
+Copied scripts: `ls.py`, `ls.sh`
+- for list files recursively.
