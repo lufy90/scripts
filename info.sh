@@ -120,3 +120,8 @@ lvs > $infodir/lvs
 
 # 20190920
 yum list > $infodir/yum_list_$(date "+%Y%m%d")
+
+
+# 20190921
+rpm -qi kernel > $infodir/rpm_-qi_kernel
+rpm -ql kernel > $infodir/rpm_-ql_kernel
