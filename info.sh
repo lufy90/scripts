@@ -117,3 +117,6 @@ java -version > $infodir/java_-version 2>&1
 
 # 20190805
 lvs > $infodir/lvs
+
+# 20190920
+yum list > $infodir/yum_list_$(date "+%Y%m%d")
