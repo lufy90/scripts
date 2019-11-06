@@ -8,7 +8,7 @@ rpm_exist_check(){
     local rpmlist=$1
     for i in $rpmlist
     do
-        rpm -qi $i > /dev/null || echo "FAIL: $i not exists!"
+        rpm -qi $i > /dev/null || echo "FAIL: $i not installed!"
     done
 }
 
@@ -17,7 +17,11 @@ rpm_file_check(){
     local rpmlist=$1
     for i in $rpmlist
     do
+        rpm -qi $i > /dev/null || {
+            echo "FAIL: $i not installed!" && continue
+            }
         filelist=$(rpm -ql $i)
+        if [[ $filelist == "(contains no files)" ]]; then continue; fi
         for f in $filelist
         do
             test -f $f || test -d $f || echo "FAIL: $f not exists in package $i"
@@ -35,11 +39,12 @@ Usage:
 }
 
 main(){
-    while getopts e:f: arg
+    while getopts e:f:h arg
     do
         case $arg in
             e) rpm_exist_check "`cat $OPTARG | tr "\n" " "`" ;;
             f) rpm_file_check "`cat $OPTARG | tr "\n" " "`" ;;
+            h) usage ;;
             \?) usage ;;
         esac
     done

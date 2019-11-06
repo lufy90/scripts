@@ -10,14 +10,14 @@ TEST_EXE=test.sh
 SYSINFO=*info
 STRESSLOG=stress.log*
 SARLOG=sar.out*
-SARCPU=sar-u.out
-SARMEM=sar-r.out
-SARSWAP=sar-S.out
-SARQUEUE=sar-q.out
+SARCPU=sar-u*
+SARMEM=sar-r*
+SARSWAP=sar-S*
+SARQUEUE=sar-q*
 STRESSDETAIL=ltpstress*[1-3]
 GENLOAD_SCRIPT=genload.sh
 RESULTDIR=$1
-
+RS="PASS FAIL CONF"
 get_data()
 {
   ## Auto Calculating
@@ -136,4 +136,25 @@ report()
   summary
 }
 
+statistics(){
+echo -ne "No.\tCase Name\tType\tPass Times\tFAIL Times\tCONF Times\n"
+local i=1
+local c=
+local RS="FAIL CONF"
+
+for rs in $RS
+do
+    for c in `grep $rs $STRESSLOG | sort | uniq | awk '{print $1}'`
+    do
+    local tpass=$(grep "^$c" $STRESSLOG | grep "PASS" | wc -l)
+    local tfail=$(grep "^$c" $STRESSLOG | grep "FAIL" | wc -l)
+    local tconf=$(grep "^$c" $STRESSLOG | grep "CONF" | wc -l)
+    echo -ne "${i}\t${c}\t${rs}\t${tpass}\t${tfail}\t${tconf}\n"
+    i=$((i+1))
+    done
+done
+}
+
+
 report
+statistics
