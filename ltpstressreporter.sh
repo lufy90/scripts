@@ -39,32 +39,32 @@ get_data()
   confednum=$(grep CONF $STRESSLOG | awk '{print $1}' | sort | uniq | wc -l 2>/dev/null)
   passednum=$(grep PASS $STRESSLOG | awk '{print $1}' | sort | uniq | wc -l 2>/dev/null)
   if [ -f $SARCPU ]; then
-    sar_u_idle=$(grep Average $SARCPU | awk '{print $NF}' 2>/dev/null)
+    sar_u_idle=$(tail -n 1 $SARCPU | awk '{print $NF}' 2>/dev/null)
   else
-    sar_u_idle=$(sar -u -f $SARLOG | grep Average | awk '{print $NF}' 2>/dev/null)
+    sar_u_idle=$(sar -u -f $SARLOG | tail -n 1 | awk '{print $NF}' 2>/dev/null)
   fi
   sar_u=$(echo "100 - $sar_u_idle" | bc)
 
   if [ -f $SARMEM ]; then
-    sar_m=$(grep Average $SARMEM | awk '{print $4}' 2>/dev/null)
+    sar_m=$(tail -n 1 $SARMEM | awk '{print $4}' 2>/dev/null)
   else
-    sar_m=$(sar -r -f $SARLOG | grep Average | awk '{print $4}' 2>/dev/null)
+    sar_m=$(sar -r -f $SARLOG | tail -n 1 | awk '{print $4}' 2>/dev/null)
   fi
 
   if [ -f $SARSWAP ]; then
-    sar_s=$(grep Average $SARSWAP | awk '{print $4}' 2>/dev/null)
+    sar_s=$(tail -n 1 $SARSWAP | awk '{print $4}' 2>/dev/null)
   else
-    sar_s=$(sar -S -f $SARLOG | grep Average | awk '{print $4}' 2>/dev/null)
+    sar_s=$(sar -S -f $SARLOG | tail -n 1 | awk '{print $4}' 2>/dev/null)
   fi
 
   if [ -f $SARQUEUE ]; then
-    sar_q1=$(grep Average $SARQUEUE | awk '{print $4}' 2>/dev/null)
-    sar_q5=$(grep Average $SARQUEUE | awk '{print $5}' 2>/dev/null)
-    sar_q15=$(grep Average $SARQUEUE | awk '{print $6}' 2>/dev/null)
+    sar_q1=$(tail -n 1 $SARQUEUE | awk '{print $4}' 2>/dev/null)
+    sar_q5=$(tail -n 1 $SARQUEUE | awk '{print $5}' 2>/dev/null)
+    sar_q15=$(tail -n 1 $SARQUEUE | awk '{print $6}' 2>/dev/null)
   else
-    sar_q1=$(sar -q -f $SARLOG | grep Average | awk '{print $4}' 2>/dev/null)
-    sar_q5=$(sar -q -f $SARLOG | grep Average | awk '{print $5}' 2>/dev/null)
-    sar_q15=$(sar -q -f $SARLOG | grep Average | awk '{print $6}' 2>/dev/null)
+    sar_q1=$(sar -q -f $SARLOG | tail -n 1 | awk '{print $4}' 2>/dev/null)
+    sar_q5=$(sar -q -f $SARLOG | tail -n 1 | awk '{print $5}' 2>/dev/null)
+    sar_q15=$(sar -q -f $SARLOG | tail -n 1 | awk '{print $6}' 2>/dev/null)
   fi
 
 }
@@ -95,8 +95,8 @@ summary()
   echo "Result Summary"
   echo  $sep
   echo "Cases in Total:" $totalcount
-  echo "FAIL Cases:" $failedcount
-  echo "CONF Cases:" $confedcount
+  echo "FAIL Count:" $failedcount
+  echo "CONF Count:" $confedcount
   echo
   echo "System Load During Test:"
   echo "CPU(%):" $sar_u
