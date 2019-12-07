@@ -1,4 +1,4 @@
-#!/bin/env python36
+#!/usr/bin/python3
 # ls.py
 # list files.
 

@@ -1,4 +1,4 @@
-#!/bin/env python36
+#!/usr/bin/python3
 # filename: chindent.py
 # Author: lufei
 # Date: 20190918 08:45:46

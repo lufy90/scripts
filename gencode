@@ -1,4 +1,4 @@
-#!/bin/env python36
+#!/usr/bin/python3
 # gencode
 # Author: Lufei
 # Date: 20190813
@@ -19,7 +19,7 @@ def gencode(filename):
   if suffix == 'sh':
     interpreter = "#!/bin/bash"
   elif suffix == 'py':
-    interpreter = "#!/bin/env python36"
+    interpreter = "#!/usr/bin/python3"
   elif suffix == 'c' or suffix == 'h' or suffix == 'cpp':
     commenter = '//'
   elif suffix == 'pl':
