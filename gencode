@@ -20,7 +20,8 @@ def gencode(filename):
     interpreter = "#!/bin/bash"
   elif suffix == 'py':
     interpreter = "#!/usr/bin/python3"
-  elif suffix == 'c' or suffix == 'h' or suffix == 'cpp':
+  elif (suffix == 'c' or suffix == 'h' or suffix == 'cpp' 
+          or suffix == 'java'):
     commenter = '//'
   elif suffix == 'pl':
     interpreter = '#!/bin/env perl'
