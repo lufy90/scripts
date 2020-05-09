@@ -80,7 +80,7 @@ summary()
   local sep="--------------------------------------------------------"
   local sep2="========================================================="
  
-  echo "Summary Report of LTP Stress Test"
+  echo -e "\e[1mSummary Report of LTP Stress Test\e[0m"
 #  echo $sep2
   echo Test Information
   echo  "$sep"
@@ -106,8 +106,7 @@ summary()
   echo
 
   echo "FAIL Cases(${failednum} in total):"
-  grep FAIL $STRESSLOG | sort | uniq | awk '{print $1}'
-  
+  grep FAIL $STRESSLOG | awk '{print $1}'| sort | uniq  
   echo 
   echo "CONF Cases(${confednum} in total):"
   grep CONF $STRESSLOG | sort | uniq | awk '{print $1}'
@@ -144,7 +143,7 @@ local RS="FAIL CONF"
 
 for rs in $RS
 do
-    for c in `grep $rs $STRESSLOG | sort | uniq | awk '{print $1}'`
+    for c in `grep $rs $STRESSLOG | awk '{print $1}' | sort | uniq`
     do
     local tpass=$(grep "^$c" $STRESSLOG | grep "PASS" | wc -l)
     local tfail=$(grep "^$c" $STRESSLOG | grep "FAIL" | wc -l)
