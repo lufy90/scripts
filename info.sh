@@ -3,12 +3,6 @@
 # Getting system info.
 
 
-# 20190703
-# add hostname > hostname
-
-# 20190703
-# add blkid
-
 export LANG=en_US.UTF-8
 
 hostname=`hostname`
@@ -112,6 +106,7 @@ yum list > $infodir/yum_list_$(date "+%Y%m%d")
 rpm -qi kernel > $infodir/rpm_-qi_kernel
 rpm -ql kernel > $infodir/rpm_-ql_kernel
 ulimit -a > $infodir/ulimit_-a
+cp /root/anaconda-ks.cfg $infodir/
 
 
 echo -e "\e[1mFinished!\e[0m"
