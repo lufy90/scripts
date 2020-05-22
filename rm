@@ -1,0 +1,37 @@
+#!/bin/bash
+# filename: rm
+# Author: lufei
+# Date: 20200521 10:06:32
+#
+# for replacing system rm command.
+# Mark a accident caused by me today:
+# I did execute rm -rf ~/Public/ by TAB completion.
+# Some of documents I downloaded very hard lost :(:(:(
+#
+
+function rm(){
+    local f=$1
+    if [ "x$f" == "x" ]; then
+        echo "Error: Argument needed."  &> /dev/stderr
+        exit 1
+    fi
+    if [ ! -e $f ]; then
+        echo "Error: no such file or directory: $f" &> /dev/stderr
+        exit 2
+    fi
+
+    mv $f $TRASH/
+    }
+
+function main {
+    local i
+    for i
+    do
+            rm $i
+    done
+    }
+
+if [ "`basename $0`" == "rm" ]; then
+    main $@
+fi
+
