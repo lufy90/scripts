@@ -107,6 +107,7 @@ rpm -qi kernel > $infodir/rpm_-qi_kernel
 rpm -ql kernel > $infodir/rpm_-ql_kernel
 ulimit -a > $infodir/ulimit_-a
 cp /root/anaconda-ks.cfg $infodir/
+last > $infodir/last
 
 
 echo -e "\e[1mFinished!\e[0m"
