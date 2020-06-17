@@ -16,6 +16,7 @@ main() {
     local defdir=/tmp/$(hostname)-info
     local infodir=${1-$defdir}
     mkdir -p $infodir
+    local oldifs=$IFS
     IFS=";"
     # cmdlist1 for cmds need to collect output
     local cmdlist1="ip ad;ps -ef;rpm -qa;crontab -l;netstat -nlp;systemctl list-unit-files;free -m;lsblk"
@@ -33,6 +34,7 @@ main() {
         IFS=" "
         exe2 $i
     done
+    IFS=$oldifs
     }
 
 

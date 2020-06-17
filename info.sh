@@ -108,6 +108,7 @@ rpm -ql kernel > $infodir/rpm_-ql_kernel
 ulimit -a > $infodir/ulimit_-a
 cp /root/anaconda-ks.cfg $infodir/
 last > $infodir/last
+netstat -tunlp > $infodir/netsat_-tunlp
 
 
 echo -e "\e[1mFinished!\e[0m"

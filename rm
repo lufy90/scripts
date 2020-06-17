@@ -7,10 +7,16 @@
 # Mark a accident caused by me today:
 # I did execute rm -rf ~/Public/ by TAB completion.
 # Some of documents I downloaded very hard lost :(:(:(
-#
+# I deleted my /usr/bin/rm file, and replaced with this rm scripts
+# from then on.
+
+
+TRASH=/tmp/
 
 function rm(){
     local f=$1
+    local t=
+
     if [ "x$f" == "x" ]; then
         echo "Error: Argument needed."  &> /dev/stderr
         exit 1
@@ -20,7 +26,11 @@ function rm(){
         exit 2
     fi
 
-    mv $f $TRASH/
+    if [ -e $TRASH/$f ]; then
+        t=`date +%H%M%S`
+    fi
+
+    mv $f $TRASH/$t
     }
 
 function main {
